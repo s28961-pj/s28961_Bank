@@ -35,4 +35,39 @@ class AccountServiceTest {
         assertEquals(account.getFirstName(), result.getFirstName());
         assertNotNull(result.getId());
     }
+
+    @Test
+    void shouldThrowExceptionWhenFirstNameIsNull() {
+        Account account = new Account(0, 93042211111L, 100.0, Currency.PLN, "", "Liedtke");
+        assertThrows(ValidationException.class, () -> accountService.addAccount(account));
+    }
+
+    @Test
+    void shouldThrowExceptionWhenLastNameIsNull() {
+        Account account = new Account(0, 93042211111L, 100.0, Currency.PLN, "Roland", "");
+        assertThrows(ValidationException.class, () -> accountService.addAccount(account));
+    }
+
+    @Test
+    void shouldThrowExceptionWhenPESELIsNull() {
+        Account account = new Account(0, 0, 100.0, Currency.PLN, "Roland", "Liedtke");
+        assertThrows(ValidationException.class, () -> accountService.addAccount(account));
+    }
+
+    @Test
+    void shouldThrowExceptionWhenPESELIsInvalid() {
+        Account account = new Account(0, 2323, 100.0, Currency.PLN, "Roland", "Liedtke");
+        assertThrows(ValidationException.class, () -> accountService.addAccount(account));
+    }
+
+    @Test
+    void shouldThrowExceptionWhenBalanceIsInvalid() {
+        Account account = new Account(0, 2323, -1000.0, Currency.PLN, "Roland", "Liedtke");
+        assertThrows(ValidationException.class, () -> accountService.addAccount(account));
+    }
+
+    @Test
+    void shouldThrowExceptionWhenGetEmptyAccountList() {
+        assertThrows(ValidationException.class, () -> accountService.getAccountList());
+    }
 }
