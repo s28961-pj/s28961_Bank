@@ -5,9 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
-enum Currency {
-    PLN, EUR, USD
-}
 @Data
 @AllArgsConstructor
 public class Account {
