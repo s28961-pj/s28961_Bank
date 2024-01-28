@@ -20,7 +20,15 @@ public class AccountRepository {
         return accountList.get(id);
     }
 
+    public List<Account> getAccountListByBalanceMoreThan(Double balance) {
+        return accountList.stream().filter(account -> account.getBalance() >= balance).toList();
+    }
+
     public List<Account> getAccountList() {
         return accountList;
+    }
+
+    public void clearAccountList() {
+        accountList = new ArrayList<>();
     }
 }
