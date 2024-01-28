@@ -38,10 +38,13 @@ public class AccountService {
         return accountRepository.getAccountById(id);
     }
 
+    public List<Account> getAccountListByBalanceMoreThan(Double balance) {
+        return accountRepository.getAccountListByBalanceMoreThan(balance).stream().toList();
+    }
+
     public List<Account> getAccountList() throws ValidationException {
         if(accountRepository.getAccountList().isEmpty() || accountRepository.getAccountList() == null) {
             throw new ValidationException("Account List is EMPTY! ");
-        } else
-        return accountRepository.getAccountList();
+        } else return accountRepository.getAccountList();
     }
 }
