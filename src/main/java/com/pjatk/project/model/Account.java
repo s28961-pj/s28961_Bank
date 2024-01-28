@@ -1,12 +1,13 @@
 package com.pjatk.project.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 enum Waluta {
     PLN, EUR, USD
 }
-@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class Account {
     private Integer id;
