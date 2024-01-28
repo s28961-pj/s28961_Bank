@@ -5,14 +5,12 @@ import com.pjatk.project.service.AccountService;
 import jakarta.xml.bind.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/accounts")
 public class AccountController {
     AccountService accountService;
 
@@ -21,18 +19,25 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @PostMapping("/accounts")
-    public ResponseEntity<Account> createAccount(@RequestBody Account account) {
+    @PostMapping("/")
+    public ResponseEntity<Account> createAccount(@RequestBody Account account) throws ValidationException {
         accountService.addAccount(account);
         return ResponseEntity.ok(account);
     }
 
-    @GetMapping("/accounts")
+    @GetMapping("/")
     public List<Account> getAccountList() throws ValidationException {
         return accountService.getAccountList();
     }
-    @GetMapping("/accounts/{id}")
-    public Account getAccountById(Integer id) {
-        return accountService.getAccountById(id);
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Account> getAccountById(@PathVariable Integer id) {
+        Account account = accountService.getAccountById(id);
+        return ResponseEntity.ok(account);
+    }
+
+    @GetMapping("/balance/{balance}")
+    public List<Account> getAccountWhereBalanceIsBiggerThan(@PathVariable Double balance) {
+        return accountService.getAccountListByBalanceMoreThan(balance);
     }
 }
