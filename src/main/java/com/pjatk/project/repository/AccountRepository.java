@@ -11,9 +11,10 @@ import java.util.List;
 public class AccountRepository {
     private List<Account> accountList = new ArrayList<>();
 
-    public void addAccount(Account account) {
+    public Account addAccount(Account account) {
         account.setId(accountList.size());
         accountList.add(account);
+        return account;
     }
 
     public Account getAccountById(Integer id) {

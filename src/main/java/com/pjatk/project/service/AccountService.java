@@ -22,7 +22,7 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
-    public void addAccount(Account account) throws ValidationException {
+    public Account addAccount(Account account) throws ValidationException {
         if (account.getPesel() < 10000000000L || account.getPesel() > 99999999999L) {
             throw new ValidationException("Wrong PESEL!");
         } else if (account.getBalance() < 0) {
@@ -31,7 +31,7 @@ public class AccountService {
             throw new ValidationException("FirstName field is EMPTY!");
         } else if (account.getLastName().isBlank() || account.getLastName().isEmpty()) {
             throw new ValidationException("FirstName field is EMPTY!");
-        } else accountRepository.addAccount(account);
+        } else return accountRepository.addAccount(account);
     }
 
     public Account getAccountById(Integer id) {
