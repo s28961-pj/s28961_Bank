@@ -39,7 +39,8 @@ public class AccountService {
     }
 
     public List<Account> getAccountListByBalanceMoreThan(Double balance) {
-        return accountRepository.getAccountListByBalanceMoreThan(balance).stream().toList();
+        List<Account> moreThan = accountRepository.getAccountListByBalanceMoreThan(balance);
+        return moreThan;
     }
 
     public List<Account> getAccountList() throws ValidationException {
