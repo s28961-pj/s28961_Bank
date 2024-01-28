@@ -3,18 +3,19 @@ package com.pjatk.project.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-enum Waluta {
+enum Currency {
     PLN, EUR, USD
 }
-@AllArgsConstructor
 @Data
+@AllArgsConstructor
 public class Account {
     private Integer id;
-    private Integer pesel;
-    private Double saldo_poczatkowe;
-    private Waluta waluta;
-    private String imie;
-    private String nazwisko;
+    private long pesel;
+    private Double balance;
+    private Currency currency;
+    private String firstName;
+    private String lastName;
 
 }
