@@ -3,10 +3,7 @@ package com.pjatk.project.service;
 import com.pjatk.project.model.Account;
 import com.pjatk.project.repository.AccountRepository;
 import jakarta.xml.bind.ValidationException;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,12 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AccountService {
 
-    private AccountRepository accountRepository;
-
-    @Autowired
-    public AccountService(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
-    }
+    private final AccountRepository accountRepository;
 
     public Account addAccount(Account account) throws ValidationException {
         if (account.getPesel() < 10000000000L || account.getPesel() > 99999999999L) {
@@ -39,12 +31,11 @@ public class AccountService {
     }
 
     public List<Account> getAccountListByBalanceMoreThan(Double balance) {
-        List<Account> moreThan = accountRepository.getAccountListByBalanceMoreThan(balance);
-        return moreThan;
+        return accountRepository.getAccountListByBalanceMoreThan(balance);
     }
 
     public List<Account> getAccountList() throws ValidationException {
-        if(accountRepository.getAccountList().isEmpty() || accountRepository.getAccountList() == null) {
+        if(accountRepository.getAccountList().isEmpty()) {
             throw new ValidationException("Account List is EMPTY! ");
         } else return accountRepository.getAccountList();
     }
